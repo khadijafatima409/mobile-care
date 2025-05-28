@@ -6,7 +6,7 @@ import Custombtn from "./Custombtn";
 const Navbar = () => {
   return (
     <div>
-      <div className="bg-black px-[48px] py-1 text-white text-xs flex justify-between">
+      <div className="bg-black  py-1 text-white text-xs flex justify-between px-12">
         <p>Pomoc & kontakt</p>
         <p>
           Rastislavova 68, Košice <span className="pl-2">+421 919 215 491</span>
@@ -18,7 +18,7 @@ const Navbar = () => {
         <p className="text-white">Nové iPhone 14 PRO s 20% zľavou ✨</p>
       </div>
 
-      <div className="bg-black px-[48px] text-white ">
+      <div className="bg-black text-white flex flex-col gap-4 px-12">
         <div className="flex justify-between">
           <div className="">
             <ul className="flex gap-2">
@@ -50,16 +50,30 @@ const Navbar = () => {
             ))}
           </div>
         </div>
-        <div className="flex">
+        <div className="flex gap-4 justify-between">
           <Custombtn
             label="Všetky kategórie"
             iconSrc="/icons/menu.svg"
             iconPosition="right"
+            className="bg-white text-black gap-4 font-bold text-base hover:bg-purple-1 hover:text-white"
           />
           <div className="flex gap-4">
             {tabBtns.map((tab, idx) => (
               <Custombtn key={idx} label={tab.label} />
             ))}
+          </div>
+          <div className="flex items-center bg-white  px-3 py-1 border-2">
+            <Image
+              src="/icons/search.svg"
+              alt="search"
+              width={24}
+              height={24}
+            />
+            <input
+              type="text"
+              placeholder="Zadajte názov produktu"
+              className="ml-2 outline-none border-none  w-full placeholder-gray-500 text-base"
+            />
           </div>
         </div>
       </div>
