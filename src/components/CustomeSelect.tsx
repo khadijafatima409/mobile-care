@@ -15,19 +15,19 @@ const CustomSelect = ({ defaultSelected, items }: CustomSelectProps) => {
     setIsOpen(false);
   };
   return (
-    <div className="w-40 relative flex flex-col items-center  border-2 border-white-smoke text-zodiac">
+    <div className="w-40 relative flex flex-col items-center  border-2 border-white-smoke">
       <button
         type="button"
-        className="font-bold px-4 md:py-3 py-2 w-full flex justify-between items-center  text-base  border-2 border-transparent duration-300"
+        className="font-bold px-4 py-2  w-full flex justify-between items-center  text-base  border-2 border-transparent duration-300"
         onClick={() => {
           setIsOpen((prev) => !prev);
         }}
       >
         {selectedItem}
-        <Image src={selectIcon} alt="" height={24} width={24} />
+        <Image src={selectIcon} alt="" />
       </button>
       {isOpen && (
-        <div className="bg-aqua absolute top-14 flex flex-col items-start rounded-lg w-[99%]">
+        <div className=" absolute top-14 flex flex-col items-start rounded-lg w-[99%]">
           {items.map((item, i) => {
             return (
               <div
