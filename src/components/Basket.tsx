@@ -2,6 +2,8 @@ import React from "react";
 
 import BasketItem from "./BasketItem";
 
+import CartSummary from "./CartSummary";
+
 const Basket = () => {
   return (
     <div>
@@ -9,13 +11,13 @@ const Basket = () => {
         <h2 className="font-bold text-2xl">Váš košík</h2>
         <p className="font-medium text-lg">V košíku máte aktuálne 2 produkty</p>
       </div>
-      <div>
-        <div className="border w-2/4 flex flex-col gap-8">
+      <div className="px-12 flex gap-12">
+        <div className="w-2/4 flex flex-col gap-8">
           {basketItems.map((item, index) => (
             <BasketItem key={index} {...item} />
           ))}
         </div>
-        <div></div>
+        <CartSummary />
       </div>
     </div>
   );
@@ -35,7 +37,7 @@ const basketItems = [
     imageSrc: "/basket/iphone-pro.svg",
     title: "iPhone 14 Pro",
     details: "Kapacita: 256 GB, Farba: Silver",
-    price: "1499 €",
+    price: "1299 €",
     oldPrice: "1999 €",
     discountNote: "Uštríte 20% oproti pôvodnej sume",
   },
@@ -43,7 +45,7 @@ const basketItems = [
     imageSrc: "/basket/airpods.svg",
     title: "Apple AirPods 2 GEN",
     details: "Kapacita: 256 GB, Farba: Silver",
-    price: "1199 €",
+    price: "1299  €",
     oldPrice: "1599 €",
     discountNote: "Uštríte 15% oproti pôvodnej sume",
   },

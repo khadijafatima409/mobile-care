@@ -18,7 +18,7 @@ const Navbar = () => {
         <p className="text-white">Nové iPhone 14 PRO s 20% zľavou ✨</p>
       </div>
 
-      <div className="bg-black text-white flex flex-col gap-4 px-12">
+      <div className="bg-black text-white flex flex-col gap-4 px-12 pb-4">
         <div className="flex justify-between">
           <div className="">
             <ul className="flex gap-2">

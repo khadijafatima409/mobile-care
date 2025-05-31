@@ -15,7 +15,7 @@ const CustomSelect = ({ defaultSelected, items }: CustomSelectProps) => {
     setIsOpen(false);
   };
   return (
-    <div className="w-40 relative flex flex-col items-center  border-2 border-white-smoke">
+    <div className="w-full relative flex flex-col items-center  border-2 border-white-smoke">
       <button
         type="button"
         className="font-bold px-4 py-2  w-full flex justify-between items-center  text-base  border-2 border-transparent duration-300"

@@ -23,7 +23,7 @@ const BasketItem = ({
   return (
     <div className=" border-b-2 border-white-smoke">
       <div className="pb-4 flex  justify-between ">
-        <div className="flex">
+        <div className="flex gap-5">
           <Image src={imageSrc} alt={title} height="128" width="104" />
           <div className="flex justify-between flex-col">
             <div className="font-inter">
