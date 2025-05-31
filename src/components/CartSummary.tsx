@@ -3,7 +3,7 @@ import Custombtn from "./Custombtn";
 
 const CartSummary = () => {
   return (
-    <div className="border w-2/4">
+    <div className="border-2 border-white-smoke w-2/4">
       {/* Delivery Info */}
       <div className="bg-white-smoke p-5">
         <div className="flex justify-between items-center">
