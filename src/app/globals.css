@@ -39,3 +39,30 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+@keyframes subtleRotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(-7deg);
+  }
+  50% {
+    transform: rotate(7deg);
+  }
+  75% {
+    transform: rotate(-4deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+.heart-icon {
+  cursor: pointer;
+  display: inline-block;
+  transition: transform 0.3s ease-in-out;
+}
+
+.heart-icon:hover {
+  animation: subtleRotate 0.8s ease-in-out;
+}
