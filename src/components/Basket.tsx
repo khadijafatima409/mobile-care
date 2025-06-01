@@ -11,7 +11,7 @@ const Basket = () => {
         <h2 className="font-bold text-2xl">Váš košík</h2>
         <p className="font-medium text-lg">V košíku máte aktuálne 2 produkty</p>
       </div>
-      <div className="px-12 flex gap-12">
+      <div className="flex gap-12">
         <div className="w-2/4 flex flex-col gap-8">
           {basketItems.map((item, index) => (
             <BasketItem key={index} {...item} />

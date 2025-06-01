@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter");
 @import "tailwindcss";
 
 :root {
@@ -12,6 +13,11 @@
   --color-secondory-red: #f54e80;
   --color-purple-1: #6a4ef5;
   --color-grey-light: #999999;
+  --color-cream: #f4e8ce;
+  --color-charcol-purple: #594f63;
+  --color-secondory-yellow: #d0ff16;
+  --color-pearl-gray: #f0f2f2;
+  --color-charcol-gray: #403e3d;
 
   --text-large: 40px;
 
