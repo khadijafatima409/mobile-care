@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Custombtn from "./Custombtn";
+import PaymentIcons from "./PaymentIcons";
 
 const CartSummary = () => {
   return (
@@ -31,7 +32,8 @@ const CartSummary = () => {
             <h2 className="text-lg font-medium font-inter">
               Akceptujeme platby
             </h2>
-            <div className="flex gap-2">
+            <PaymentIcons />
+            {/* <div className="flex gap-2">
               {paymentIcons.map((src, index) => (
                 <Image
                   key={index}
@@ -41,7 +43,7 @@ const CartSummary = () => {
                   width={46}
                 />
               ))}
-            </div>
+            </div> */}
           </div>
 
           {/* Voucher */}

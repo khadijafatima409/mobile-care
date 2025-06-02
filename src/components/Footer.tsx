@@ -2,6 +2,7 @@ import Image from "next/image";
 import React from "react";
 import Custombtn from "./Custombtn";
 import FooterNavItems from "./FooterNavItems";
+import PaymentIcons from "./PaymentIcons";
 
 const Footer = () => {
   return (
@@ -106,8 +107,17 @@ const Footer = () => {
           <li>Polska</li>
         </ul>
       </div>
-      <div>
-        <div></div>
+      <div className="flex flex-col gap-2">
+        <div className="flex justify-end">
+          <PaymentIcons />
+        </div>
+        <div>
+          <ul className="flex gap-4 text-xs font-inter font-medium leading-[130%] py-1">
+            <li>Podmienky používania</li>
+            <li>GDPR</li>
+            <li>Ochrana osobných údajov</li>
+          </ul>
+        </div>
       </div>
     </div>
   );
