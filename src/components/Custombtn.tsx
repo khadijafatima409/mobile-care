@@ -5,16 +5,19 @@ interface CustomBtnProps {
   label: string;
   iconPosition?: "left" | "right";
   className?: string;
+  onClick?: () => void;
 }
 const Custombtn = ({
   iconSrc,
   label,
   iconPosition = "left",
   className,
+  onClick,
 }: CustomBtnProps) => {
   return (
     <div>
       <button
+        onClick={onClick}
         className={`flex items-center justify-center px-6 py-3 gap-2 outline-none hover:bg-gray-700 hover:cursor-pointer hover:text-purple-1 transition-all ${className}`}
       >
         {iconSrc && iconPosition === "left" && (

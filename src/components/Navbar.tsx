@@ -1,9 +1,15 @@
-import React from "react";
+"use client";
+
+import React, { useState } from "react";
 import TopNav from "./TopNav";
 import Image from "next/image";
 import Custombtn from "./Custombtn";
+import Sidebar from "./Sidebar";
 
 const Navbar = () => {
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
+
   return (
     <div>
       <div className="bg-black  py-1 text-white text-xs flex justify-between px-12">
@@ -56,6 +62,7 @@ const Navbar = () => {
             iconSrc="/icons/menu.svg"
             iconPosition="right"
             className="bg-white text-black gap-4 font-bold text-base hover:bg-purple-1 hover:text-white"
+            onClick={toggleSidebar}
           />
           <div className="flex gap-4">
             {tabBtns.map((tab, idx) => (
@@ -77,6 +84,7 @@ const Navbar = () => {
           </div>
         </div>
       </div>
+      <Sidebar isOpen={isSidebarOpen} onClose={toggleSidebar} />
     </div>
   );
 };

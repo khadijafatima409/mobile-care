@@ -79,7 +79,7 @@ const Footer = () => {
                   {socialLinks.map(({ href, icon, alt }, index) => (
                     <li key={index} className="p-2">
                       <a href={href} target="_blank" rel="noopener noreferrer">
-                        <Image src={icon} alt={alt} height={32} width={32} />
+                        <Image src={icon} alt={alt} height={16} width={16} />
                       </a>
                     </li>
                   ))}
