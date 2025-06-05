@@ -15,11 +15,22 @@ type SidebarGroupType = {
   items: SidebarItemType[];
 };
 
-const SidebarItem = () => {
+interface Props {
+  setSelectedLabel: (label: string) => void;
+  setSelectedSubItems: (items: SidebarItemType[]) => void;
+}
+
+const SidebarItem = ({ setSelectedLabel, setSelectedSubItems }: Props) => {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
 
-  const handleToggle = (index: number) => {
+  const handleToggle = (
+    index: number,
+    label: string,
+    items: SidebarItemType[]
+  ) => {
     setActiveIndex((prev) => (prev === index ? null : index));
+    setSelectedLabel(label);
+    setSelectedSubItems(items);
   };
 
   let itemOffset = 0; // to keep track of item index across groups
@@ -45,7 +56,9 @@ const SidebarItem = () => {
                   key={item.id}
                   className="flex justify-between items-center py-1"
                   onClick={() =>
-                    group.hasRightIcon && handleToggle(globalIndex)
+                    group.hasRightIcon
+                      ? handleToggle(globalIndex, item.label, group.items)
+                      : null
                   }
                 >
                   <div className="flex gap-2">
@@ -166,127 +179,3 @@ const sidebarGroups: SidebarGroupType[] = [
     items: [{ id: 14, label: "Sledujte nás" }],
   },
 ];
-
-// const sidebarGroups = [
-//   {
-//     id: "group-1",
-//     hasBorder: true,
-//     hasIcon: true,
-//     items: [
-//       { id: 1, label: "Všetky kategórie" },
-//       { id: 2, label: "iPhone" },
-//       { id: 3, label: "Apple AirPods" },
-//       { id: 4, label: "Macbook" },
-//       { id: 5, label: "Apple Watch" },
-//       { id: 6, label: "Príslušenstvo" },
-//     ],
-//   },
-//   {
-//     id: "group-2",
-//     hasBorder: true,
-//     hasIcon: true,
-//     items: [
-//       { id: 7, label: "Najpredávanejšie" },
-//       { id: 8, label: "Najnovšie" },
-//       { id: 9, label: "Zľavy" },
-//     ],
-//   },
-//   {
-//     id: "group-3",
-//     hasBorder: true,
-//     hasIcon: false,
-//     items: [
-//       { id: 10, label: "Kontakt" },
-//       { id: 11, label: "Často kladené otázky" },
-//       { id: 12, label: "Blog" },
-//     ],
-//   },
-//   {
-//     id: "group-4",
-//     hasBorder: true,
-//     hasIcon: false,
-//     items: [{ id: 13, label: "Obľúbené produkty" }],
-//   },
-// ];
-
-// import Image from "next/image";
-// import React, { useState } from "react";
-
-// const SidebarItem = () => {
-//   const [activeIndex, setActiveIndex] = useState<number | null>(null);
-
-//   const handleToggle = (index: number) => {
-//     setActiveIndex((prev) => (prev === index ? null : index));
-//   };
-
-//   return (
-//     <ul className="group flex flex-col gap-2 text-black cursor-pointer border-b-2 border-b-soft-purple pb-4">
-//       {sidebarItems.map((item, index) => {
-//         const isActive = activeIndex === index;
-
-//         return (
-//           <li
-//             key={item.id}
-//             className="group flex justify-between items-center py-1 cursor-pointer"
-//             onClick={() => handleToggle(index)}
-//           >
-//             <p
-//               className={`font-['Inter'] text-base leading-[140%] transition-all ${
-//                 isActive
-//                   ? "font-bold text-white underline"
-//                   : "font-semibold text-lavender-mist group-hover:underline"
-//               }`}
-//             >
-//               {item.label}
-//             </p>
-
-//             <div
-//               className={`px-[10px] py-[7px] transition-all ${
-//                 isActive ? "bg-white" : "bg-purple-1"
-//               }`}
-//             >
-//               <Image
-//                 src={
-//                   isActive
-//                     ? "/icons/blue-rightarrow.svg"
-//                     : "/icons/light-rightarrow.svg"
-//                 }
-//                 alt="arrow"
-//                 width={10}
-//                 height={16}
-//               />
-//             </div>
-//           </li>
-//         );
-//       })}
-//     </ul>
-//   );
-// };
-
-// export default SidebarItem;
-// const sidebarItems = [
-//   {
-//     id: 1,
-//     label: "Všetky kategórie",
-//   },
-//   {
-//     id: 2,
-//     label: "iPhone",
-//   },
-//   {
-//     id: 3,
-//     label: "Apple AirPods",
-//   },
-//   {
-//     id: 4,
-//     label: "Macbook",
-//   },
-//   {
-//     id: 5,
-//     label: "Apple Watch",
-//   },
-//   {
-//     id: 6,
-//     label: "Príslušenstvo",
-//   },
-// ];
