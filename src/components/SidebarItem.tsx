@@ -1,36 +1,32 @@
+import { SidebarItemType, SidebarGroupType } from "../type";
 import Image from "next/image";
 import React, { useState } from "react";
-
-type SidebarItemType = {
-  id: number;
-  label: string;
-  leftIcon?: string;
-  rightElement?: string | React.ReactNode;
-};
-
-type SidebarGroupType = {
-  id: string;
-  hasBorder: boolean;
-  hasRightIcon: boolean;
-  items: SidebarItemType[];
-};
 
 interface Props {
   setSelectedLabel: (label: string) => void;
   setSelectedSubItems: (items: SidebarItemType[]) => void;
+  isSubItem?: boolean;
+  items?: SidebarItemType[];
 }
 
-const SidebarItem = ({ setSelectedLabel, setSelectedSubItems }: Props) => {
+const SidebarItem = ({
+  setSelectedLabel,
+  setSelectedSubItems,
+  isSubItem,
+  items,
+}: Props) => {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
   const handleToggle = (
     index: number,
     label: string,
-    items: SidebarItemType[]
+    item: SidebarItemType
   ) => {
     setActiveIndex((prev) => (prev === index ? null : index));
     setSelectedLabel(label);
-    setSelectedSubItems(items);
+    // setSelectedSubItems(items);
+    setSelectedSubItems(item.subItems || []);
   };
 
   let itemOffset = 0; // to keep track of item index across groups
@@ -39,7 +35,10 @@ const SidebarItem = ({ setSelectedLabel, setSelectedSubItems }: Props) => {
     <div className="flex flex-col gap-6 text-black">
       {" "}
       {/* gap-6 = 24px between groups */}
-      {sidebarGroups.map((group) => {
+      {(items
+        ? [{ id: "sub-group", hasBorder: false, hasRightIcon: true, items }]
+        : sidebarGroups
+      ).map((group) => {
         return (
           <ul
             key={group.id}
@@ -50,16 +49,19 @@ const SidebarItem = ({ setSelectedLabel, setSelectedSubItems }: Props) => {
             {group.items.map((item, index) => {
               const globalIndex = itemOffset + index;
               const isActive = activeIndex === globalIndex;
+              const isHovered = hoveredIndex === index;
 
               return (
                 <li
                   key={item.id}
                   className="flex justify-between items-center py-1"
                   onClick={() =>
-                    group.hasRightIcon
-                      ? handleToggle(globalIndex, item.label, group.items)
+                    item.hasRightIcon ?? group.hasRightIcon
+                      ? handleToggle(globalIndex, item.label, item)
                       : null
                   }
+                  onMouseEnter={() => setHoveredIndex(index)}
+                  onMouseLeave={() => setHoveredIndex(null)}
                 >
                   <div className="flex gap-2">
                     {item.leftIcon && (
@@ -71,10 +73,21 @@ const SidebarItem = ({ setSelectedLabel, setSelectedSubItems }: Props) => {
                       />
                     )}
                     <p
+                      // className={`font-['Inter'] text-base leading-[140%] transition-all ${
+                      //   isActive
+                      //     ? "font-bold text-white "
+                      //     : "font-semibold text-lavender-mist hover:underline"
+                      // }`}
                       className={`font-['Inter'] text-base leading-[140%] transition-all ${
                         isActive
-                          ? "font-bold text-white "
-                          : "font-semibold text-lavender-mist hover:underline"
+                          ? `font-bold ${
+                              isSubItem ? "text-black" : "text-white"
+                            }`
+                          : `font-semibold ${
+                              isSubItem
+                                ? "text-black group-hover:underline"
+                                : "text-lavender-mist hover:underline"
+                            }`
                       }`}
                     >
                       {item.label}
@@ -86,17 +99,40 @@ const SidebarItem = ({ setSelectedLabel, setSelectedSubItems }: Props) => {
                     )}
                   </div>
 
-                  {group.hasRightIcon && (
+                  {(item.hasRightIcon ?? group.hasRightIcon) && (
                     <div
                       className={`px-[10px] py-[7px] transition-all ${
-                        isActive ? "bg-white" : "bg-purple-1"
+                        // isSubItem && isActive ? "bg-black" : ""
+                        isActive ? (isSubItem ? "bg-black" : "bg-white") : ""
                       }`}
                     >
                       <Image
+                        // src={
+                        //   isActive
+                        //     ? "/icons/blue-rightarrow.svg"
+                        //     : isHovered
+                        //     ? "/icons/white-rightarrow.svg"
+                        //     : "/icons/light-rightarrow.svg"
+                        // }
                         src={
                           isActive
-                            ? "/icons/blue-rightarrow.svg"
+                            ? isSubItem
+                              ? "/icons/white-rightarrow.svg"
+                              : "/icons/blue-rightarrow.svg"
+                            : isHovered
+                            ? isSubItem
+                              ? "/icons/blue-rightarrow.svg"
+                              : "/icons/white-rightarrow.svg"
                             : "/icons/light-rightarrow.svg"
+                          // isActive
+                          //   ? isSubItem
+                          //     ? "/icons/light-rightarrow.svg"
+                          //     : "/icons/blue-rightarrow.svg"
+                          //   : isHovered
+                          //   ? isSubItem
+                          //     ? "/icons/blue-rightarrow.svg"
+                          //     : "/icons/white-rightarrow.svg"
+                          //   : "/icons/light-rightarrow.svg"
                         }
                         alt="arrow"
                         width={10}
@@ -126,10 +162,64 @@ const sidebarGroups: SidebarGroupType[] = [
     hasBorder: true,
     hasRightIcon: true,
     items: [
-      { id: 1, label: "Všetky kategórie" },
-      { id: 2, label: "iPhone" },
-      { id: 3, label: "Apple AirPods" },
-      { id: 4, label: "Macbook" },
+      {
+        id: 1,
+        label: "Všetky kategórie",
+        subItems: [
+          {
+            id: 101,
+            label: "iPhone",
+            hasRightIcon: true,
+            leftIcon: "/basket/iphone-pro.svg",
+          },
+          { id: 102, label: "Apple AirPods", leftIcon: "/basket/airpods.svg" },
+          {
+            id: 103,
+            label: "Macbook",
+            leftIcon: "/product/MacBook-Pro-16.svg",
+          },
+          { id: 104, label: "iPad", leftIcon: "/product/ipad.svg" },
+          { id: 105, label: "Smarthome", leftIcon: "/product/smarthome.svg" },
+          {
+            id: 106,
+            label: "Príslušenstvo",
+            leftIcon: "/product/pngwing 5.svg",
+          },
+          { id: 107, label: "Herná zóna", leftIcon: "/product/gamezone.svg" },
+          { id: 108, label: "Smarthome", leftIcon: "/product/speaker.svg" },
+          { id: 109, label: "PC", leftIcon: "/product/PC.svg" },
+          {
+            id: 110,
+            label: "Elektronika",
+            leftIcon: "/product/electronic.svg",
+          },
+        ],
+      },
+      {
+        id: 2,
+        label: "iPhone",
+        subItems: [
+          { id: 111, label: "iPhone 14" },
+          { id: 112, label: "iPhone 13" },
+          { id: 113, label: "iPhone SE" },
+        ],
+      },
+      {
+        id: 3,
+        label: "Apple AirPods",
+        subItems: [
+          { id: 114, label: "AirPods Pro" },
+          { id: 115, label: "AirPods Max" },
+        ],
+      },
+      {
+        id: 4,
+        label: "Macbook",
+        subItems: [
+          { id: 116, label: "Macbook Air" },
+          { id: 117, label: "Macbook Pro" },
+        ],
+      },
       { id: 5, label: "Apple Watch" },
       { id: 6, label: "Príslušenstvo" },
     ],

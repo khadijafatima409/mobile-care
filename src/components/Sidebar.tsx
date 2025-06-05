@@ -3,15 +3,16 @@
 import Image from "next/image";
 import React, { useState } from "react";
 import SidebarItem from "./SidebarItem";
-import Submenubar from "./Submenubar";
+// import Submenubar from "./Submenubar";
 import { SidebarItemType } from "../type";
+// import SubItem from "./SubItem";
 
 interface SidebarProps {
   isOpen: boolean;
   onClose: () => void;
 }
 
-const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
+const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
   const [selectedLabel, setSelectedLabel] = useState<string | null>(null);
   const [selectedSubItems, setSelectedSubItems] = useState<
     SidebarItemType[] | null
@@ -57,7 +58,15 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
             <h2 className="text-2xl font-bold font-['MC'] leading-[120%] mb-4 text-purple-1">
               {selectedLabel}
             </h2>
-            <Submenubar items={selectedSubItems} />
+            {/* <Submenubar items={selectedSubItems} /> */}
+            <div className="space-y-2">
+              <SidebarItem
+                setSelectedLabel={setSelectedLabel}
+                setSelectedSubItems={setSelectedSubItems}
+                isSubItem={true}
+                items={selectedSubItems}
+              />
+            </div>
           </div>
         )}
       </div>
