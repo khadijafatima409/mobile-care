@@ -100,7 +100,7 @@ const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
             </h2>
             <div className="space-y-2">
               <SidebarItem
-                setSelectedLabel={() => {}} // No further nesting
+                setSelectedLabel={handleSubItemSelect} // No further nesting
                 setSelectedSubItems={() => {}}
                 isSubItem={true}
                 items={subSelectedSubItems}

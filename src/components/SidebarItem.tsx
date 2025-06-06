@@ -106,13 +106,14 @@ const SidebarItem = ({
                   {hasRightIcon && hasSubItems && (
                     <div
                       className={`px-[10px] py-[7px] transition-all ${
-                        isActive
-                          ? isSecondSubmenu
-                            ? "bg-black"
-                            : isSubItem
-                            ? "bg-black"
-                            : "bg-white"
-                          : ""
+                        // isActive
+                        //   ? isSecondSubmenu
+                        //     ? "bg-black"
+                        //     : isSubItem
+                        //     ? "bg-black"
+                        //     : "bg-white"
+                        //   : ""
+                        isActive ? (isSubItem ? "bg-black" : "bg-white") : ""
                       }`}
                     >
                       <Image
