@@ -56,10 +56,10 @@ export const sidebarGroups: SidebarGroupType[] = [
                 ],
               },
               { id: 1003, label: "Pro" },
-              { id: 1003, label: "iMac 24”" },
-              { id: 1003, label: "Mini" },
+              { id: 1004, label: "iMac 24”" },
+              { id: 1005, label: "Mini" },
               {
-                id: 1003,
+                id: 1006,
                 label: "Studio",
                 subItems: [
                   { id: 2001, label: "Studio subitem 1" },
@@ -67,9 +67,9 @@ export const sidebarGroups: SidebarGroupType[] = [
                   { id: 2003, label: "Studio subitem 3" },
                 ],
               },
-              { id: 1003, label: "Mac Pro" },
-              { id: 1003, label: "Displeje" },
-              { id: 1003, label: "Doplnky pre Mac" },
+              { id: 1007, label: "Mac Pro" },
+              { id: 1008, label: "Displeje" },
+              { id: 1009, label: "Doplnky pre Mac" },
             ],
           },
           {
@@ -77,9 +77,9 @@ export const sidebarGroups: SidebarGroupType[] = [
             label: "iPad",
             leftIcon: "/product/ipad.svg",
             subItems: [
-              { id: 1001, label: "iPhone 15 Pro" },
-              { id: 1002, label: "iPhone 15" },
-              { id: 1003, label: "iPhone 14" },
+              { id: 1010, label: "iPhone 15 Pro" },
+              { id: 1011, label: "iPhone 15" },
+              { id: 1012, label: "iPhone 14" },
             ],
           },
           {
@@ -87,9 +87,9 @@ export const sidebarGroups: SidebarGroupType[] = [
             label: "Smarthome",
             leftIcon: "/product/smarthome.svg",
             subItems: [
-              { id: 1001, label: "iPhone 15 Pro" },
-              { id: 1002, label: "iPhone 15" },
-              { id: 1003, label: "iPhone 14" },
+              { id: 1013, label: "iPhone 15 Pro" },
+              { id: 1014, label: "iPhone 15" },
+              { id: 1015, label: "iPhone 14" },
             ],
           },
 
@@ -98,9 +98,9 @@ export const sidebarGroups: SidebarGroupType[] = [
             label: "Príslušenstvo",
             leftIcon: "/product/pngwing 5.svg",
             subItems: [
-              { id: 1001, label: "iPhone 15 Pro" },
-              { id: 1002, label: "iPhone 15" },
-              { id: 1003, label: "iPhone 14" },
+              { id: 1016, label: "iPhone 15 Pro" },
+              { id: 1017, label: "iPhone 15" },
+              { id: 1018, label: "iPhone 14" },
             ],
           },
           {
@@ -108,9 +108,9 @@ export const sidebarGroups: SidebarGroupType[] = [
             label: "Herná zóna",
             leftIcon: "/product/gamezone.svg",
             subItems: [
-              { id: 1001, label: "iPhone 15 Pro" },
-              { id: 1002, label: "iPhone 15" },
-              { id: 1003, label: "iPhone 14" },
+              { id: 1019, label: "iPhone 15 Pro" },
+              { id: 1020, label: "iPhone 15" },
+              { id: 1021, label: "iPhone 14" },
             ],
           },
           {
@@ -118,9 +118,9 @@ export const sidebarGroups: SidebarGroupType[] = [
             label: "Smarthome",
             leftIcon: "/product/speaker.svg",
             subItems: [
-              { id: 1001, label: "iPhone 15 Pro" },
-              { id: 1002, label: "iPhone 15" },
-              { id: 1003, label: "iPhone 14" },
+              { id: 1022, label: "iPhone 15 Pro" },
+              { id: 1023, label: "iPhone 15" },
+              { id: 1024, label: "iPhone 14" },
             ],
           },
           {
@@ -128,9 +128,9 @@ export const sidebarGroups: SidebarGroupType[] = [
             label: "PC",
             leftIcon: "/product/PC.svg",
             subItems: [
-              { id: 1001, label: "iPhone 15 Pro" },
-              { id: 1002, label: "iPhone 15" },
-              { id: 1003, label: "iPhone 14" },
+              { id: 1025, label: "iPhone 15 Pro" },
+              { id: 1026, label: "iPhone 15" },
+              { id: 1027, label: "iPhone 14" },
             ],
           },
           {
@@ -138,9 +138,9 @@ export const sidebarGroups: SidebarGroupType[] = [
             label: "Elektronika",
             leftIcon: "/product/electronic.svg",
             subItems: [
-              { id: 1001, label: "iPhone 15 Pro" },
-              { id: 1002, label: "iPhone 15" },
-              { id: 1003, label: "iPhone 14" },
+              { id: 1028, label: "iPhone 15 Pro" },
+              { id: 1029, label: "iPhone 15" },
+              { id: 1030, label: "iPhone 14" },
             ],
           },
         ],
@@ -175,24 +175,24 @@ export const sidebarGroups: SidebarGroupType[] = [
         id: 5,
         label: "iPad",
         subItems: [
-          { id: 116, label: "Macbook Air" },
-          { id: 117, label: "Macbook Pro" },
+          { id: 118, label: "Macbook Air" },
+          { id: 119, label: "Macbook Pro" },
         ],
       },
       {
         id: 7,
         label: "Apple Watch",
         subItems: [
-          { id: 116, label: "Macbook Air" },
-          { id: 117, label: "Macbook Pro" },
+          { id: 120, label: "Macbook Air" },
+          { id: 121, label: "Macbook Pro" },
         ],
       },
       {
         id: 8,
         label: "Príslušenstvo",
         subItems: [
-          { id: 116, label: "Macbook Air" },
-          { id: 117, label: "Macbook Pro" },
+          { id: 122, label: "Macbook Air" },
+          { id: 123, label: "Macbook Pro" },
         ],
       },
     ],

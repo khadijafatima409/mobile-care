@@ -1,11 +1,7 @@
-// components/Sidebar.tsx
-
 import Image from "next/image";
 import React, { useState } from "react";
 import SidebarItem from "./SidebarItem";
-// import Submenubar from "./Submenubar";
 import { SidebarItemType } from "../type";
-// import SubItem from "./SubItem";
 
 interface SidebarProps {
   isOpen: boolean;
@@ -13,10 +9,6 @@ interface SidebarProps {
 }
 
 const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
-  // const [selectedLabel, setSelectedLabel] = useState<string | null>(null);
-  // const [selectedSubItems, setSelectedSubItems] = useState<
-  //   SidebarItemType[] | null
-  // >(null);
   const [selectedLabel, setSelectedLabel] = useState<string | null>(null);
   const [selectedSubItems, setSelectedSubItems] = useState<
     SidebarItemType[] | null
@@ -53,7 +45,7 @@ const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
 
       <div className="flex justify-between">
         {/* Sidebar */}
-        <div className="fixed top-0 left-0 h-full  bg-purple-1 z-50  shadow-lg transition-all duration-300 pt-6 px-12 overflow-y-scroll ">
+        <div className="fixed top-0 left-0 h-full  bg-purple-1 z-50  shadow-lg transition-all duration-300 pt-6 px-12 overflow-y-scroll scrollbar-hide ">
           {/* topnav */}
           <div className="flex gap-20 items-center justify-center pb-8">
             <Image src={"/logo.svg"} height={48} width={213} alt={"logo"} />
@@ -71,8 +63,6 @@ const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
           </div>
 
           <SidebarItem
-            // setSelectedLabel={setSelectedLabel}
-            // setSelectedSubItems={setSelectedSubItems}
             setSelectedLabel={handleMainItemSelect}
             setSelectedSubItems={() => {}} // Not used in this context
             selectedLabel={selectedLabel}
@@ -81,30 +71,30 @@ const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
         </div>
         {/* Submenu */}
         {selectedLabel && selectedSubItems && (
-          <div className="bg-white px-8 pt-6 fixed top-0 left-[30%] h-full w-[424px] z-50 hadow-lg transition-all duration-300">
+          <div className="bg-white px-8 pt-6 fixed top-0 left-[419px] h-full w-[424px] z-50 hadow-lg transition-all duration-300 overflow-y-scroll scrollbar-hide ">
             <h2 className="text-2xl font-bold font-['MC'] leading-[120%] mb-4 text-purple-1">
               {selectedLabel}
             </h2>
             <div className="space-y-2">
               <SidebarItem
-                // setSelectedLabel={setSelectedLabel}
-                // setSelectedSubItems={setSelectedSubItems}
-                // isSubItem={true}
-                // items={selectedSubItems}
                 setSelectedLabel={handleSubItemSelect}
                 setSelectedSubItems={() => {}} // Not used in this context
                 isSubItem={true}
                 items={selectedSubItems}
                 selectedLabel={subSelectedLabel}
                 isMainSidebar={false}
+                isSecondSubmenu={false}
               />
+            </div>
+            <div className="relative h-[258px] w-full overflow-hidden mt-12 mb-28">
+              <div className="absolute inset-0 animate-baner-slider"></div>
             </div>
           </div>
         )}
 
         {/* Second Submenu */}
         {subSelectedLabel && subSelectedSubItems && (
-          <div className="bg-white px-8 pt-6 fixed top-0 left-[830px] h-full w-80 z-50 shadow-lg transition-all duration-300 overflow-y-auto">
+          <div className="bg-white px-8 pt-6 fixed top-0 left-[843px] h-full w-[424px] z-50 transition-all duration-300 overflow-y-auto border-l-2 border-white-smoke">
             <h2 className="text-2xl font-bold mb-4 text-purple-800">
               {subSelectedLabel}
             </h2>
@@ -114,8 +104,9 @@ const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
                 setSelectedSubItems={() => {}}
                 isSubItem={true}
                 items={subSelectedSubItems}
-                selectedLabel={null}
+                selectedLabel={subSelectedLabel}
                 isMainSidebar={false}
+                isSecondSubmenu={true}
               />
             </div>
           </div>

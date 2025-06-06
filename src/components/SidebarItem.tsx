@@ -11,6 +11,7 @@ interface Props {
   items?: SidebarItemType[];
   selectedLabel?: string | null;
   isMainSidebar?: boolean;
+  isSecondSubmenu?: boolean;
 }
 
 const SidebarItem = ({
@@ -18,19 +19,11 @@ const SidebarItem = ({
   isSubItem,
   items,
   selectedLabel,
+
+  isSecondSubmenu = false,
 }: Props) => {
-  // const [activeIndex, setActiveIndex] = useState<number | null>(null);
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
-  // const handleToggle = (
-  //   index: number,
-  //   label: string,
-  //   item: SidebarItemType
-  // ) => {
-  //   setActiveIndex((prev) => (prev === index ? null : index));
-  //   setSelectedLabel(label);
-  //   setSelectedSubItems(item.subItems || []);
-  // };
   const handleToggle = (label: string, item: SidebarItemType) => {
     if (item.subItems && item.subItems.length > 0) {
       // If item has sub-items, show them
@@ -45,7 +38,6 @@ const SidebarItem = ({
 
   return (
     <div className="flex flex-col gap-6 text-black">
-      {/* gap-6 = 24px between groups */}
       {(items
         ? [{ id: "sub-group", hasBorder: false, hasRightIcon: true, items }]
         : sidebarGroups
@@ -58,9 +50,6 @@ const SidebarItem = ({
             }`}
           >
             {group.items.map((item, index) => {
-              // const globalIndex = itemOffset + index;
-              // const isActive = activeIndex === globalIndex;
-              // const isHovered = hoveredIndex === index;
               const globalIndex = itemOffset + index;
               const isActive = selectedLabel === item.label;
               const isHovered = hoveredIndex === index;
@@ -71,11 +60,6 @@ const SidebarItem = ({
                 <li
                   key={item.id}
                   className="flex justify-between items-center py-1"
-                  // onClick={() =>
-                  //   item.hasRightIcon ?? group.hasRightIcon
-                  //     ? handleToggle(globalIndex, item.label, item)
-                  //     : null
-                  // }
                   onClick={() =>
                     hasRightIcon && hasSubItems
                       ? handleToggle(item.label, item)
@@ -94,17 +78,21 @@ const SidebarItem = ({
                       />
                     )}
                     <p
-                      className={`font-['Inter'] text-base leading-[140%] transition-all ${
-                        isActive
-                          ? `font-bold ${
-                              isSubItem ? "text-black" : "text-white"
-                            }`
-                          : `font-semibold ${
-                              isSubItem
-                                ? "text-black group-hover:underline"
-                                : "text-lavender-mist hover:underline"
-                            }`
-                      }`}
+                      className={`font-['Inter'] text-base leading-[140%] transition-all
+    ${
+      isSecondSubmenu
+        ? isActive
+          ? "font-bold text-black"
+          : "font-normal text-black hover:underline hover:font-bold"
+        : isSubItem
+        ? isActive
+          ? "font-bold text-black"
+          : "font-bold text-black hover:underline"
+        : isActive
+        ? "font-bold text-white"
+        : "font-semibold text-lavender-mist hover:underline"
+    }
+  `}
                     >
                       {item.label}
                     </p>
@@ -115,11 +103,16 @@ const SidebarItem = ({
                     )}
                   </div>
 
-                  {/* {(item.hasRightIcon ?? group.hasRightIcon) && ( */}
                   {hasRightIcon && hasSubItems && (
                     <div
                       className={`px-[10px] py-[7px] transition-all ${
-                        isActive ? (isSubItem ? "bg-black" : "bg-white") : ""
+                        isActive
+                          ? isSecondSubmenu
+                            ? "bg-black"
+                            : isSubItem
+                            ? "bg-black"
+                            : "bg-white"
+                          : ""
                       }`}
                     >
                       <Image
