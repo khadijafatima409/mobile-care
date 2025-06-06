@@ -13,11 +13,34 @@ interface SidebarProps {
 }
 
 const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
+  // const [selectedLabel, setSelectedLabel] = useState<string | null>(null);
+  // const [selectedSubItems, setSelectedSubItems] = useState<
+  //   SidebarItemType[] | null
+  // >(null);
   const [selectedLabel, setSelectedLabel] = useState<string | null>(null);
   const [selectedSubItems, setSelectedSubItems] = useState<
     SidebarItemType[] | null
   >(null);
+  const [subSelectedLabel, setSubSelectedLabel] = useState<string | null>(null);
+  const [subSelectedSubItems, setSubSelectedSubItems] = useState<
+    SidebarItemType[] | null
+  >(null);
 
+  const handleMainItemSelect = (
+    label: string,
+    subItems?: SidebarItemType[]
+  ) => {
+    setSelectedLabel(label);
+    setSelectedSubItems(subItems ?? null);
+    // Reset sub-submenu when main item changes
+    setSubSelectedLabel(null);
+    setSubSelectedSubItems(null);
+  };
+
+  const handleSubItemSelect = (label: string, subItems?: SidebarItemType[]) => {
+    setSubSelectedLabel(label);
+    setSubSelectedSubItems(subItems ?? null);
+  };
   if (!isOpen) return null;
 
   return (
@@ -48,8 +71,12 @@ const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
           </div>
 
           <SidebarItem
-            setSelectedLabel={setSelectedLabel}
-            setSelectedSubItems={setSelectedSubItems}
+            // setSelectedLabel={setSelectedLabel}
+            // setSelectedSubItems={setSelectedSubItems}
+            setSelectedLabel={handleMainItemSelect}
+            setSelectedSubItems={() => {}} // Not used in this context
+            selectedLabel={selectedLabel}
+            isMainSidebar={true}
           />
         </div>
         {/* Submenu */}
@@ -58,13 +85,37 @@ const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
             <h2 className="text-2xl font-bold font-['MC'] leading-[120%] mb-4 text-purple-1">
               {selectedLabel}
             </h2>
-            {/* <Submenubar items={selectedSubItems} /> */}
             <div className="space-y-2">
               <SidebarItem
-                setSelectedLabel={setSelectedLabel}
-                setSelectedSubItems={setSelectedSubItems}
+                // setSelectedLabel={setSelectedLabel}
+                // setSelectedSubItems={setSelectedSubItems}
+                // isSubItem={true}
+                // items={selectedSubItems}
+                setSelectedLabel={handleSubItemSelect}
+                setSelectedSubItems={() => {}} // Not used in this context
                 isSubItem={true}
                 items={selectedSubItems}
+                selectedLabel={subSelectedLabel}
+                isMainSidebar={false}
+              />
+            </div>
+          </div>
+        )}
+
+        {/* Second Submenu */}
+        {subSelectedLabel && subSelectedSubItems && (
+          <div className="bg-white px-8 pt-6 fixed top-0 left-[830px] h-full w-80 z-50 shadow-lg transition-all duration-300 overflow-y-auto">
+            <h2 className="text-2xl font-bold mb-4 text-purple-800">
+              {subSelectedLabel}
+            </h2>
+            <div className="space-y-2">
+              <SidebarItem
+                setSelectedLabel={() => {}} // No further nesting
+                setSelectedSubItems={() => {}}
+                isSubItem={true}
+                items={subSelectedSubItems}
+                selectedLabel={null}
+                isMainSidebar={false}
               />
             </div>
           </div>

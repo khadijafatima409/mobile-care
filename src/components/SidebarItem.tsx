@@ -5,29 +5,40 @@ import Image from "next/image";
 import React, { useState } from "react";
 
 interface Props {
-  setSelectedLabel: (label: string) => void;
+  setSelectedLabel: (label: string, subItems?: SidebarItemType[]) => void;
   setSelectedSubItems: (items: SidebarItemType[]) => void;
   isSubItem?: boolean;
   items?: SidebarItemType[];
+  selectedLabel?: string | null;
+  isMainSidebar?: boolean;
 }
 
 const SidebarItem = ({
   setSelectedLabel,
-  setSelectedSubItems,
   isSubItem,
   items,
+  selectedLabel,
 }: Props) => {
-  const [activeIndex, setActiveIndex] = useState<number | null>(null);
+  // const [activeIndex, setActiveIndex] = useState<number | null>(null);
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
-  const handleToggle = (
-    index: number,
-    label: string,
-    item: SidebarItemType
-  ) => {
-    setActiveIndex((prev) => (prev === index ? null : index));
-    setSelectedLabel(label);
-    setSelectedSubItems(item.subItems || []);
+  // const handleToggle = (
+  //   index: number,
+  //   label: string,
+  //   item: SidebarItemType
+  // ) => {
+  //   setActiveIndex((prev) => (prev === index ? null : index));
+  //   setSelectedLabel(label);
+  //   setSelectedSubItems(item.subItems || []);
+  // };
+  const handleToggle = (label: string, item: SidebarItemType) => {
+    if (item.subItems && item.subItems.length > 0) {
+      // If item has sub-items, show them
+      setSelectedLabel(label, item.subItems);
+    } else {
+      // If no sub-items, just select the item
+      setSelectedLabel(label, []);
+    }
   };
 
   let itemOffset = 0; // to keep track of item index across groups
@@ -47,17 +58,27 @@ const SidebarItem = ({
             }`}
           >
             {group.items.map((item, index) => {
+              // const globalIndex = itemOffset + index;
+              // const isActive = activeIndex === globalIndex;
+              // const isHovered = hoveredIndex === index;
               const globalIndex = itemOffset + index;
-              const isActive = activeIndex === globalIndex;
+              const isActive = selectedLabel === item.label;
               const isHovered = hoveredIndex === index;
+              const hasRightIcon = item.hasRightIcon ?? group.hasRightIcon;
+              const hasSubItems = item.subItems && item.subItems.length > 0;
 
               return (
                 <li
                   key={item.id}
                   className="flex justify-between items-center py-1"
+                  // onClick={() =>
+                  //   item.hasRightIcon ?? group.hasRightIcon
+                  //     ? handleToggle(globalIndex, item.label, item)
+                  //     : null
+                  // }
                   onClick={() =>
-                    item.hasRightIcon ?? group.hasRightIcon
-                      ? handleToggle(globalIndex, item.label, item)
+                    hasRightIcon && hasSubItems
+                      ? handleToggle(item.label, item)
                       : null
                   }
                   onMouseEnter={() => setHoveredIndex(index)}
@@ -94,7 +115,8 @@ const SidebarItem = ({
                     )}
                   </div>
 
-                  {(item.hasRightIcon ?? group.hasRightIcon) && (
+                  {/* {(item.hasRightIcon ?? group.hasRightIcon) && ( */}
+                  {hasRightIcon && hasSubItems && (
                     <div
                       className={`px-[10px] py-[7px] transition-all ${
                         isActive ? (isSubItem ? "bg-black" : "bg-white") : ""

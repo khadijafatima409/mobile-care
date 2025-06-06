@@ -8,7 +8,7 @@ import Sidebar from "./Sidebar";
 
 const Navbar = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
+  // const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
 
   return (
     <div>
@@ -62,7 +62,7 @@ const Navbar = () => {
             iconSrc="/icons/menu.svg"
             iconPosition="right"
             className="bg-white text-black gap-4 font-bold text-base hover:bg-purple-1 hover:text-white"
-            onClick={toggleSidebar}
+            onClick={() => setIsSidebarOpen(true)}
           />
           <div className="flex gap-4">
             {tabBtns.map((tab, idx) => (
@@ -84,7 +84,7 @@ const Navbar = () => {
           </div>
         </div>
       </div>
-      <Sidebar isOpen={isSidebarOpen} onClose={toggleSidebar} />
+      <Sidebar isOpen={isSidebarOpen} onClose={() => setIsSidebarOpen(false)} />
     </div>
   );
 };
